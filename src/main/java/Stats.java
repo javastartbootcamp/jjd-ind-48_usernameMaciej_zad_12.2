@@ -2,13 +2,18 @@ public class Stats {
     private double avgSalary;
     private double lowestSalary;
     private double highestSalary;
-    private int employeesDepartment;
+    private int itDepartment;
+    private int supportDepartment;
+    private int managementDepartment;
 
-    public Stats(double avgSalary, double lowestSalary, double highestSalary, int employeesDepartment) {
+    public Stats(double avgSalary, double lowestSalary, double highestSalary,
+                 int itDepartment, int supportDepartment, int managementDepartment) {
         this.avgSalary = avgSalary;
         this.lowestSalary = lowestSalary;
         this.highestSalary = highestSalary;
-        this.employeesDepartment = employeesDepartment;
+        this.itDepartment = itDepartment;
+        this.supportDepartment = supportDepartment;
+        this.managementDepartment = managementDepartment;
     }
 
     public double getAvgSalary() {
@@ -23,7 +28,15 @@ public class Stats {
         return highestSalary;
     }
 
-    public int getEmployeesDepartment() {
-        return employeesDepartment;
+    public int getItDepartment() {
+        return itDepartment;
+    }
+
+    public int getSupportDepartment() {
+        return supportDepartment;
+    }
+
+    public int getManagementDepartment() {
+        return managementDepartment;
     }
 }

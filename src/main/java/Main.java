@@ -22,9 +22,14 @@ public class Main {
         System.out.println("Minimalna wypłata: " + lowestSalary);
         double highestSalary = getHighestSalary(employees);
         System.out.println("Maksymalna wypłata: " + highestSalary);
-        int employeesDepartment = getEmployeesDepartment(employees, "IT");
+        int itDepartment = getEmployeesDepartment(employees, "IT");
+        System.out.println("Liczba pracowników z działu IT: " + itDepartment);
+        int supportDepartment = getEmployeesDepartment(employees, "Support");
+        System.out.println("Liczba pracowników z działu Support: " + supportDepartment);
+        int managementDepartment = getEmployeesDepartment(employees, "Management");
+        System.out.println("Liczba pracowników z działu Management: " + managementDepartment);
 
-        Stats stats = new Stats(avgSalary, lowestSalary, highestSalary, employeesDepartment);
+        Stats stats = new Stats(avgSalary, lowestSalary, highestSalary, itDepartment, supportDepartment, managementDepartment);
 
         try {
             saveToFile("stats.txt", stats);
@@ -35,31 +40,32 @@ public class Main {
 
     private static void saveToFile(String statsEmployeesFile, Stats stats) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(statsEmployeesFile));
-        writer.write((int) stats.getAvgSalary());
+        writer.write("Średnia wypłata: ");
+        writer.write(Double.toString(stats.getAvgSalary()));
         writer.newLine();
-        writer.write((int) stats.getLowestSalary());
+        writer.write("Minimalna wypłata: ");
+        writer.write(Double.toString(stats.getLowestSalary()));
         writer.newLine();
-        writer.write((int) stats.getHighestSalary());
+        writer.write("Maksymalna wypłata: ");
+        writer.write(Double.toString(stats.getHighestSalary()));
         writer.newLine();
-        writer.write(stats.getEmployeesDepartment());
+        writer.write("Liczba pracowników z działu IT: " + Integer.toString(stats.getItDepartment()));
+        writer.newLine();
+        writer.write("Liczba pracowników z działu Support: " + Integer.toString(stats.getSupportDepartment()));
+        writer.newLine();
+        writer.write("Liczba pracowników z działu Management: " + Integer.toString(stats.getManagementDepartment()));
         writer.newLine();
         writer.close();
     }
 
     private static int getEmployeesDepartment(Employee[] employees, String department) {
-        int it = 0;
-        int support = 0;
-        int management = 0;
+        int counter = 0;
         for (Employee employee : employees) {
-            if (employee.getDepartment().equals("IT")) {
-                it++;
-            } else if (employee.getDepartment().equals("Support")) {
-                support++;
-            } else if (employee.getDepartment().equals("Management")) {
-                management++;
+            if (employee.getDepartment().equals(department)) {
+                counter++;
             }
         }
-        return it + support + management;
+        return counter;
     }
 
     private static double getHighestSalary(Employee[] employees) {
